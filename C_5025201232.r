@@ -63,6 +63,11 @@ qchisq(p = 0.05, df = 2, lower.tail = FALSE)
 #3f
 
 #Soal 4
+dataset  <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt"))
+dim(dataset)
+head(dataset)
+attach(dataset)
+
 #4a
 
 #4b
@@ -76,12 +81,43 @@ qchisq(p = 0.05, df = 2, lower.tail = FALSE)
 #4f
 
 #Soal 5
+install.packages("multcompView")
+library(readr)
+library(ggplot2)
+library(multcompView)
+library(dplyr)
+
 #5a
+GTL <- read_csv("GTL.csv")
+head(GTL)
+str(GTL)
+
+qplot(x = Temp, y = Light, geom = "point", data = GTL) + 
+      facet_grid(.~Glass, labeller = label_both)
 
 #5b
+GTL$Glass <- as.factor(GTL$Glass)
+GTL$Temp_Factor <- as.factor(GTL$Temp)
+str(GTL)
+
+anova_test <- aov(Light ~ Glass*Temp_Factor, data = GTL)
+summary(anova_test)
 
 #5c
+data_table <- group_by(GTL, Glass, Temp) %>% summarise(mean = mean(Light), 
+            sd = sd(Light)) %>% arrange(desc(mean))
+print(data_table)
 
 #5d
+tukey_test <- TukeyHSD(anova_test)
+print(tukey_test)
 
 #5e
+tukey_test.cldData <- multcompLetters4(anova_test, tukey_test)
+print(tukey_test.cldData)
+
+cld <- as.data.frame.list(tukey_test.cldData$`Glass:Temp_Factor`)
+data_table$tukey_test <- cld$Letters
+print(data_table)
+
+write.csv("GTL_summary.csv")
