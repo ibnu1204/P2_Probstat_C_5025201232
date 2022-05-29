@@ -26,7 +26,7 @@ xbar = 23500
 standardev = 3900
 
 tsum.test(mean.x = xbar, s.x = standardev, n.x = n, mu = mu, 
-        alternative = "greater", var.equal = TRUE)
+          alternative = "greater", var.equal = TRUE)
 
 #2a
 
@@ -35,13 +35,28 @@ tsum.test(mean.x = xbar, s.x = standardev, n.x = n, mu = mu,
 #2c
 
 #Soal 3
+n_bdg = 19
+n_bl = 27
+mu_bdg = 3.64
+mu_bl = 2.79
+standardev_bdg = 1.67
+standardev_bl = 1.32
+
 #3a
 
 #3b
+tsum.test(n.x = n_bdg, mean.x = mean_bdg, s.x = standardev_bdg,
+          n.y = n_bl, mean.y = mean_bl, s.y = standardev_bl,
+          alternative = "greater", var.equal = TRUE)
 
 #3c
+install.packages("mosaic")
+library(mosaic)
+
+plotDist(dist = 't', df = 2)
 
 #3d
+qchisq(p = 0.05, df = 2, lower.tail = FALSE)
 
 #3e
 
