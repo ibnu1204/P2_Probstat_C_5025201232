@@ -11,9 +11,10 @@ standardev = sd(diff)
 standardev
 
 #1b
-t.test(x, y, paired = TRUE, var.equal = FALSE)
+t.test(x, y, alternative = "greater", var.equal = FALSE)
 
 #1c
+var.test(x, y)
 t.test(x, y, mu = 0, alternative = "two.sided", var.equal = TRUE)
 
 #Soal 2
@@ -29,10 +30,13 @@ tsum.test(mean.x = xbar, s.x = standardev, n.x = n, mu = mu,
           alternative = "greater", var.equal = TRUE)
 
 #2a
+#Di README
 
 #2b
+#Di README
 
 #2c
+#Di README
 
 #Soal 3
 n_bdg = 19
@@ -43,6 +47,7 @@ standardev_bdg = 1.67
 standardev_bl = 1.32
 
 #3a
+#Di README
 
 #3b
 tsum.test(n.x = n_bdg, mean.x = mean_bdg, s.x = standardev_bdg,
@@ -59,8 +64,10 @@ plotDist(dist = 't', df = 2)
 qchisq(p = 0.05, df = 2, lower.tail = FALSE)
 
 #3e
+#Di README
 
 #3f
+#Di README
 
 #Soal 4
 dataset  <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt"))
@@ -69,6 +76,13 @@ head(dataset)
 attach(dataset)
 
 #4a
+dataset$V1 <- as.factor(dataset$V1)
+dataset$V1 = factor(dataset$V1, labels = c("Kucing Oren", "Kucing Hitam", "Kucing Putih", "Kucing Oren"))
+
+class(dataset$V1)
+group1 <- subset(dataset, V1 == "Kucing Oren")
+group2 <- subset(dataset, V1 == "Kucing Hitam")
+group3 <- subset(dataset, V1 == "Kucing Putih")
 
 #4b
 
