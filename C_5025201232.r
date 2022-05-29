@@ -85,14 +85,24 @@ group2 <- subset(dataset, V1 == "Kucing Hitam")
 group3 <- subset(dataset, V1 == "Kucing Putih")
 
 #4b
+bartlett.test(Length~V1, data = dataset)
 
 #4c
+qqnorm(group1$Length)
+qqline(group1$Length)
 
 #4d
+#Di README
 
 #4e
+model1 <- lm(Length~Group, data=dataset)
+anova(model1)
+TukeyHSD(aov(model1))
 
 #4f
+library(ggplot2)
+ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + 
+  scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
 
 #Soal 5
 install.packages("multcompView")

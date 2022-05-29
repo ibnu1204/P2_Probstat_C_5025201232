@@ -112,6 +112,63 @@ Kesimpulan
 Dari uji statistik, tidak ada selisih dari rata-rata. Jika dipengaruhi nilai kritikal, akan terjadi perubahan walaupun tidak signifikan
 
 ## Soal 4
+Mengambil data dari link
+```
+dataset  <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt"))
+dim(dataset)
+head(dataset)
+attach(dataset)
+```
+
+### 4a
+Buatlah masing masing jenis spesies menjadi 3 subjek "Grup" (grup 1,grup 2,grup 3). Lalu Gambarkan plot kuantil normal untuk setiap kelompok dan lihat apakah ada outlier utama dalam homogenitas varians.
+
+Membuat dataset menajadi group dan bagi menjadi 3 bagian dalam ke 3 group
+```
+dataset$V1 <- as.factor(dataset$V1)
+dataset$V1 = factor(dataset$V1, labels = c("Kucing Oren", "Kucing Hitam", "Kucing Putih", "Kucing Oren"))
+
+class(dataset$V1)
+group1 <- subset(dataset, V1 == "Kucing Oren")
+group2 <- subset(dataset, V1 == "Kucing Hitam")
+group3 <- subset(dataset, V1 == "Kucing Putih")
+```
+
+### 4b
+Carilah atau periksalah Homogeneity of variances nya , Berapa nilai p yang didapatkan? , Apa hipotesis dan kesimpulan yang dapat diambil ?
+```
+bartlett.test(Length~V1, data = dataset)
+```
+Nilai p-value = 0.8054 dan df = 2
+
+### 4c
+Untuk uji ANOVA (satu arah), buatlah model linier dengan Panjang versus Grup dan beri nama model tersebut model 1.
+```
+qqnorm(group1$Length)
+qqline(group1$Length)
+```
+![4c](https://user-images.githubusercontent.com/81419886/170883088-9b95ac5a-1c6b-4ab9-b882-ff3e30742eb1.png)
+
+### 4d
+Dari Hasil Poin C, Berapakah nilai-p ? , Apa yang dapat Anda simpulkan dari H0?
+
+`Nilai p-value = 0.8054`
+
+### 4e
+Verifikasilah jawaban model 1 dengan Post-hoc test Tukey HSD, dari nilai p yang didapatkan apakah satu jenis kucing lebih panjang dari yang lain? Jelaskan
+```
+model1 <- lm(Length~Group, data=dataset)
+anova(model1)
+TukeyHSD(aov(model1))
+```
+
+### 4f
+Visualisasikan data dengan ggplot2
+```
+library(ggplot2)
+ggplot(dataoneway, aes(x = Group, y = Length)) + geom_boxplot(fill = "grey80", colour = "black") + 
+  scale_x_discrete() + xlab("Treatment Group") +  ylab("Length (cm)")
+```
 
 ## Soal 5
 ### 5a
