@@ -17,6 +17,17 @@ t.test(x, y, paired = TRUE, var.equal = FALSE)
 t.test(x, y, mu = 0, alternative = "two.sided", var.equal = TRUE)
 
 #Soal 2
+install.packages("BSDA")
+library(BSDA)
+
+mu = 20000
+n = 100
+xbar = 23500
+standardev = 3900
+
+tsum.test(mean.x = xbar, s.x = standardev, n.x = n, mu = mu, 
+        alternative = "greater", var.equal = TRUE)
+
 #2a
 
 #2b
