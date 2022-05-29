@@ -29,10 +29,13 @@ tsum.test(mean.x = xbar, s.x = standardev, n.x = n, mu = mu,
           alternative = "greater", var.equal = TRUE)
 
 #2a
+#Di README
 
 #2b
+#Di README
 
 #2c
+#Di README
 
 #Soal 3
 n_bdg = 19
@@ -43,6 +46,7 @@ standardev_bdg = 1.67
 standardev_bl = 1.32
 
 #3a
+#Di README
 
 #3b
 tsum.test(n.x = n_bdg, mean.x = mean_bdg, s.x = standardev_bdg,
@@ -59,8 +63,10 @@ plotDist(dist = 't', df = 2)
 qchisq(p = 0.05, df = 2, lower.tail = FALSE)
 
 #3e
+#Di README
 
 #3f
+#Di README
 
 #Soal 4
 dataset  <- read.table(url("https://rstatisticsandresearch.weebly.com/uploads/1/0/2/6/1026585/onewayanova.txt"))
